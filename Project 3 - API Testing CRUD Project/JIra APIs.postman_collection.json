@@ -1,0 +1,541 @@
+{
+	"info": {
+		"_postman_id": "0536db21-fac5-4a6d-85bc-9db5e9acfc80",
+		"name": "JIra APIs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2268496",
+		"_collection_link": "https://speeding-firefly-180610.postman.co/workspace/speeding-firefly-180610-Workspa~04dba54c-1743-4b2e-85d3-9636e60fc117/collection/2268496-0536db21-fac5-4a6d-85bc-9db5e9acfc80?action=share&source=collection_link&creator=2268496"
+	},
+	"item": [
+		{
+			"name": "Get All Projects",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{API_Token}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "kirti.mhaske@gmail.com",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Jira API Endpoint}}//rest/api/3/project",
+					"host": [
+						"{{Jira API Endpoint}}"
+					],
+					"path": [
+						"",
+						"rest",
+						"api",
+						"3",
+						"project"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All USers",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{API_Token}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "kirti.mhaske@gmail.com",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Jira API Endpoint}}/rest/api/3/users/search",
+					"host": [
+						"{{Jira API Endpoint}}"
+					],
+					"path": [
+						"rest",
+						"api",
+						"3",
+						"users",
+						"search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Project",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"console.log(pm.globals.get(\"URL\"));"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(20);\r",
+							"});\r",
+							"pm.test(\"Successful POST request\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"id\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{API_Token}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "kirti.mhaske@gmail.com",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"assigneeType\": \"UNASSIGNED\",\r\n    \"description\": \"RMM1\",\r\n    \"key\": \"RMM1\",\r\n    \"leadAccountId\": \"712020:b81581f0-0275-46bc-b6cf-1f2a285f0f45\",\r\n    \"name\": \"RMM Framework\",\r\n    \"projectTypeKey\": \"business\",\r\n    \"url\": \"https://kirtimhaske.atlassian.net\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://kirtimhaske.atlassian.net//rest/api/3/project",
+					"protocol": "https",
+					"host": [
+						"kirtimhaske",
+						"atlassian",
+						"net"
+					],
+					"path": [
+						"",
+						"rest",
+						"api",
+						"3",
+						"project"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Project",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{API_Token}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "kirti.mhaske@gmail.com",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"assigneeType\": \"UNASSIGNED\",\r\n    \"description\": \"Remedy\",\r\n    \"key\": \"RGCT\",\r\n    \"leadAccountId\": \"712020:b81581f0-0275-46bc-b6cf-1f2a285f0f45\",\r\n    \"name\": \"Remedy Application\",\r\n    \"projectTypeKey\": \"business\",\r\n    \"url\": \"https://kirtimhaske.atlassian.net\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Jira API Endpoint}}/rest/api/3/project/:Key",
+					"host": [
+						"{{Jira API Endpoint}}"
+					],
+					"path": [
+						"rest",
+						"api",
+						"3",
+						"project",
+						":Key"
+					],
+					"variable": [
+						{
+							"key": "Key",
+							"value": "RGCT"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Recent Project",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{API_Token}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "kirti.mhaske@gmail.com",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Jira API Endpoint}}/rest/api/3/project/recent",
+					"host": [
+						"{{Jira API Endpoint}}"
+					],
+					"path": [
+						"rest",
+						"api",
+						"3",
+						"project",
+						"recent"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Project by ProjectID",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{API_Token}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "kirti.mhaske@gmail.com",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"assigneeType\": \"UNASSIGNED\",\r\n    \"description\": \"Remedy\",\r\n    \"key\": \"RGCT\",\r\n    \"leadAccountId\": \"712020:b81581f0-0275-46bc-b6cf-1f2a285f0f45\",\r\n    \"name\": \"kirti_mhaske\",\r\n    \"projectTypeKey\": \"business\",\r\n    \"url\": \"https://kirtimhaske.atlassian.net\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Jira API Endpoint}}/rest/api/3/project/:ProjectID",
+					"host": [
+						"{{Jira API Endpoint}}"
+					],
+					"path": [
+						"rest",
+						"api",
+						"3",
+						"project",
+						":ProjectID"
+					],
+					"variable": [
+						{
+							"key": "ProjectID",
+							"value": "10002"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Project by Key",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"RGCT\");\r",
+							"});\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Content-Type is present\", function () {\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{API_Token}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "kirti.mhaske@gmail.com",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"assigneeType\": \"UNASSIGNED\",\r\n    \"description\": \"Remedy\",\r\n    \"key\": \"RGCT\",\r\n    \"leadAccountId\": \"712020:b81581f0-0275-46bc-b6cf-1f2a285f0f45\",\r\n    \"name\": \"kirti_mhaske\",\r\n    \"projectTypeKey\": \"business\",\r\n    \"url\": \"https://kirtimhaske.atlassian.net\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Jira API Endpoint}}/rest/api/3/project/:Key",
+					"host": [
+						"{{Jira API Endpoint}}"
+					],
+					"path": [
+						"rest",
+						"api",
+						"3",
+						"project",
+						":Key"
+					],
+					"variable": [
+						{
+							"key": "Key",
+							"value": "RGCT"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Statuses for Project",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{API_Token}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "kirti.mhaske@gmail.com",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"assigneeType\": \"UNASSIGNED\",\r\n    \"description\": \"Remedy\",\r\n    \"key\": \"RGCT\",\r\n    \"leadAccountId\": \"712020:b81581f0-0275-46bc-b6cf-1f2a285f0f45\",\r\n    \"name\": \"kirti_mhaske\",\r\n    \"projectTypeKey\": \"business\",\r\n    \"url\": \"https://kirtimhaske.atlassian.net\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Jira API Endpoint}}/rest/api/3/project/:Key/statuses",
+					"host": [
+						"{{Jira API Endpoint}}"
+					],
+					"path": [
+						"rest",
+						"api",
+						"3",
+						"project",
+						":Key",
+						"statuses"
+					],
+					"variable": [
+						{
+							"key": "Key",
+							"value": "RGCT"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Issue Type",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{API_Token}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "kirti.mhaske@gmail.com",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Jira API Endpoint}}//rest/api/3/project/10001/hierarchy",
+					"host": [
+						"{{Jira API Endpoint}}"
+					],
+					"path": [
+						"",
+						"rest",
+						"api",
+						"3",
+						"project",
+						"10001",
+						"hierarchy"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "API_Token",
+			"value": "ATATT3xFfGF0CpRTUnA8iKcCKa3PvMiwmbMyjrXrVgOyDgpFYNdjYrgc-y18gDIbjQZbb2VbXEQcZ4Mk7q5tFVrt4fTUQ5kaua7QFp1fuwc8-acopwUpYOdUL7Pq80wnlpsNsMaPpCzN1mRgkgBL9go_jIblUR_gO_j_g7_n-3MZpQkcIyjD4xM=9AB60EA6"
+		}
+	]
+}
