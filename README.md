@@ -1,13 +1,13 @@
 # Software Testing Projects
-This repository contains a list of all the projects completed during my manual testing training. The projects were completed using a combination of manual testing techniques and test management tools.
+This repository contains a list of some of the projects that I worked on in my last organization. The projects were completed using a combination of manual testing techniques and some level of automation.
 
 ## Project List
 
 | Project Name | Description | Tools Used |
 |--------------|-------------|------------|
-| Project 1    | Tested a web application for functionality and usability. | JIRA, Selenium, TestRail |
-| Project 2    | Tested a mobile application for compatibility across different devices. | Appium, TestLink |
-| Project 3    | Tested a desktop application for security vulnerabilities. | Burp Suite, Nessus, ZAP |
+| Project 1    | Tested a Avaya CloudPortal web application for functionality and non-functional requirements. | JIRA, PostMan, SOAPUI, JMeter, Git, Confluence |
+| Project 2    | Tested a Avaya HealthCheck application (Web + Desktop) for functionality and compatibility across different devices. | JIRA, PostMan, SOAPUI, JMeter, Git, Confluence |
+| Project 3    | Tested a Avaya Servicibility RA and Alarming backend systems end-to-end| JIRA, PostMan, SOAPUI, BMC Remedy ARSystem, Confluence |
 
 ## Getting Started
 
@@ -16,11 +16,6 @@ To view the details of each project, simply click on the project name in the tab
 ## Contributing
 
 If you have any feedback or suggestions for improvements, please feel free to open an issue or pull request.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-You can copy and paste this code into a Markdown file and modify the text as needed.
 
 
 ## Templates
@@ -55,7 +50,4 @@ You can copy and paste this code into a Markdown file and modify the text as nee
 - RTM
 - Test Reports
 - Test Metrics
-
-Test Plan
-I have created a Test Plan for the Project
 
